@@ -1,5 +1,6 @@
 #!/bin/bash
 clear
+echo ""
 echo "   SSHPlus" | figlet
 echo -e "\033[1;32m      INFORMACOES E OPCOES DO MENU \033[0m\n\n"
 echo -e " \033[1;37m[\033[1;31m01\033[1;37m] - \033[1;33m Cria usuario ssh"
