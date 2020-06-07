@@ -1,5 +1,5 @@
 #!/bin/bash
-_lvk=$(wget -qO- sshplus.xyz/script/versao)
+_lvk=$(wget -qO- https://raw.githubusercontent.com/script90/2.4/master/scripts/versao)
 IP=$(wget -qO- sshplus.xyz/meuip.php)
 IP2=$(wget -qO- http://whatismyip.akamai.com/)
 [[ "$IP" != "$IP2" ]] && ipdovps="$IP2" || ipdovps="$IP"
@@ -30,7 +30,7 @@ _dir2='/etc/SSHPlus'
 _mdls=("addhost" "delhost" "alterarsenha" "criarusuario" "expcleaner" "mudardata" "remover" "criarteste" "verifbot" "droplimiter" "alterarlimite" "ajuda" "sshmonitor" "badvpn" "userbackup" "blockt" "otimizar" "menu" "speedtest" "banner" "cfirm.py" "senharoot" "reiniciarservicos" "reiniciarsistema" "attscript" "conexao" "delscript" "detalhes" "botssh" "infousers" "verifatt" "limiter" "uexpired" "cabecalho" "bot" "proxy.py")
 for _arq in ${_mdls[@]}; do
 	[[ -e $_dir1/$_arq ]] && rm $_dir1/$_arq > /dev/null 2>&1
-	wget -c -P $_dir1 $lst/${key1%:*}/$key2/$_arq
+	wget -c -P $_dir1 https://raw.githubusercontent.com/script90/2.4/master/$_arq
 	chmod +x $_dir1/$_arq
 done
 mv $_dir1/cabecalho $_dir1/bot $_dir1/proxy.py $_dir2
@@ -47,8 +47,6 @@ for host in ${_host[@]}; do
 		sed -i "3i\127.0.0.1 $host" $_arq_host
 	fi
 done
-python $_dir1/cfrm.py "$ipdovps"
-rm $_dir1/cfrm.py
 crontab -r
 [[ ! -e /etc/autostart ]] && {
 echo '#!/bin/bash
