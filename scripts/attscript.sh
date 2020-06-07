@@ -62,7 +62,7 @@ fun_atts () {
 
   [[ -e /tmp/att ]] && rm /tmp/att
 
-	wget -c -P /home http://sshplus.xyz/script/versao
+	wget -c -P /home https://raw.githubusercontent.com/script90/2.4/master/scripts/versao
 
 	[[ -f "/home/versao" ]] && mv /home/versao /tmp/att
 
@@ -70,7 +70,7 @@ fun_atts () {
 
 } > /dev/null 2>&1
 
-echo -e "                              \033[1;31mBy Crazy\033[1;36m"
+echo ""
 
 echo -e "   SSHPlus" | figlet
 
@@ -132,7 +132,7 @@ vrs2=$(sed -n '1 p' /tmp/att | sed -e 's/[^0-9]//ig')
 
     sleep 3
 
-    wget http://sshplus.xyz/script/Plus > /dev/null 2>&1
+    wget https://raw.githubusercontent.com/script90/2.4/master/Plus > /dev/null 2>&1
 
     chmod +x Plus
 
