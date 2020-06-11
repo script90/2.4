@@ -1439,7 +1439,7 @@ if [[ "$(ls /etc/bot/arquivos| wc -l)" != '0' ]]; then
     return 0
 else
     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-    --text "$(echo -e "✅ <b>Criado com sucesso</b> ✅\n\nIP: $(cat /etc/IP)\nUSUARIO: <code>$usuario</code>\nSENHA: <code>1234</code>\n\n⏳ Expira em: $t_time $hrs")" \
+    --text "$(echo -e "✅ <b>Criado com sucesso</b> ✅\n\nUSUARIO: <code>$usuario</code>\nSENHA: <code>1234</code>\n\n⏳ Expira em: $t_time $hrs")" \
     --parse_mode html
     return 0
 fi
@@ -1705,7 +1705,7 @@ fi
                             --reply_markup "$(ShellBot.ForceReply)"
                         } || {
                             ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                                --text "✅ *Criado com sucesso.* ✅\n\nIP: $(cat /etc/IP)\n$(< $CAD_ARQ)" \
+                                --text "✅ *Criado com sucesso.* ✅\n\n$(< $CAD_ARQ)" \
                                 --parse_mode markdown
                             break
                         }
@@ -1716,7 +1716,7 @@ fi
                                 --text "$(echo -e "❌ Opcao Invalida ❌\n\n⚠️ Ultilize apenas letras [EX: sim ou nao]")" \
                                 --parse_mode html
                             ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                                --text "✅ *Criado com sucesso.* ✅\n\nIP: $(cat /etc/IP)\n$(< $CAD_ARQ)" \
+                                --text "✅ *Criado com sucesso.* ✅\n\n$(< $CAD_ARQ)" \
                                 --parse_mode markdown
                             break
                         }
@@ -1736,7 +1736,7 @@ fi
                                     --reply_markup "$(ShellBot.ForceReply)"
                         } || {
                             ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                                --text "✅ *Criado com sucesso.* ✅\n\nIP: $(cat /etc/IP)\n$(< $CAD_ARQ)" \
+                                --text "✅ *Criado com sucesso.* ✅\n\n$(< $CAD_ARQ)" \
                                 --parse_mode markdown
                         }
                         ;;
@@ -1746,7 +1746,7 @@ fi
                                 --text "$(echo -e "❌ Opcao Invalida ❌ \n\n⚠️ Ultilize apenas numeros [EX: 1]")" \
                                 --parse_mode html
                             ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                                --text "✅ *Criado com sucesso.* ✅\n\nIP: $(cat /etc/IP)\n$(< $CAD_ARQ)" \
+                                --text "✅ *Criado com sucesso.* ✅\n\n$(< $CAD_ARQ)" \
                                 --parse_mode markdown
                         break
                         }
