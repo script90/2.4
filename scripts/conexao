@@ -1205,22 +1205,13 @@ exit 0' > $RCLOCAL
 	echo "client
 dev tun
 proto $PROTOCOL
-sndbuf 0
-rcvbuf 0
-setenv opt method GET
 remote /SSHPLUS? $porta
 http-proxy-option CUSTOM-HEADER Host portalrecarga.vivo.com.br/recarga
 http-proxy $IP 80
-resolv-retry 5
-nobind
-persist-key
-persist-tun
 remote-cert-tls server
 cipher AES-256-CBC
 comp-lzo yes
-setenv opt block-outside-dns
 key-direction 1
-verb 3
 auth-user-pass
 keepalive 10 120
 float" > /etc/openvpn/client-common.txt
