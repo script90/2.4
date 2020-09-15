@@ -1188,8 +1188,8 @@ exit 0' > $RCLOCAL
 	if [[ "$IP" != "$IP2" ]]; then
 			IP="$IP2"
 	fi
-	# client-common.txt is created so we have a template to add further users later
-	echo "# OVPN_ACCESS_SERVER_PROFILE=[SSHPLUS]
+	cat <<-EOF >/etc/openvpn/client-common.txt
+# OVPN_ACCESS_SERVER_PROFILE=[SSHPLUS]
 client
 dev tun
 proto $PROTOCOL
@@ -1202,9 +1202,10 @@ comp-lzo yes
 key-direction 1
 auth-user-pass
 keepalive 10 120
-float" > /etc/openvpn/client-common.txt
-	# Generates the custom client.ovpn
-	newclient "SSHPLUS"
+float
+EOF
+# gerar client.ovpn
+newclient "SSHPLUS"
 	echo ""
 	echo -e "\033[1;32mOPENVPN INSTALADO COM SUCESSO\033[0m"
 fi
