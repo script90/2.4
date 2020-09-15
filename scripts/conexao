@@ -1194,7 +1194,7 @@ client
 dev tun
 proto $PROTOCOL
 remote /SSHPLUS? $porta
-#payload "HTTP/1.0 [crlf]Host: m.youtube.com[crlf] HTTP/1.0[crlf][crlf]#"
+#payload "CONNECT 127.0.0.1:22[split][crlf] HTTP/1.0 [crlf]Host: m.youtube.com[crlf][crlf]#"
 http-proxy $IP 80
 remote-cert-tls server
 cipher AES-256-CBC
