@@ -385,17 +385,7 @@ fun_drop () {
 			fun_ports () {
 				sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear > /dev/null 2>&1
 				sed -i "s/DROPBEAR_PORT=22/DROPBEAR_PORT=$porta/g" /etc/default/dropbear > /dev/null 2>&1
-				sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 110"/g' /etc/default/dropbear > /dev/null 2>&1
 			}
-			echo ""
-			echo -e "\033[1;32mCONFIGURANDO PORTA DROPBEAR !\033[0m"
-			echo ""
-			fun_bar 'fun_ports'
-			grep -v "^PasswordAuthentication yes" /etc/ssh/sshd_config > /tmp/passlogin && mv /tmp/passlogin /etc/ssh/sshd_config
-			echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
-			grep -v "^PermitTunnel yes" /etc/ssh/sshd_config > /tmp/ssh && mv /tmp/ssh /etc/ssh/sshd_config
-			echo "PermitTunnel yes" >> /etc/ssh/sshd_config
-			echo ""
 			echo -e "\033[1;32mFINALIZANDO INSTALACAO !\033[0m"
 			echo ""
 			fun_ondrop () {
