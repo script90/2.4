@@ -17,9 +17,8 @@ echo -e 'by: @crazy_vpn' > /usr/lib/sshplus && cat /usr/lib/sshplus > $lst2/lice
 [[ ! -e /etc/SSHPlus/Exp ]] && touch /etc/SSHPlus/Exp
 [[ ! -d /etc/SSHPlus/userteste ]] && mkdir /etc/SSHPlus/userteste
 netstat -nplt| grep -w 'apache2' |grep -w '80' && sed -i "s/Listen 80/Listen 81/g" /etc/apache2/ports.conf && service apache2 restart
-[[ "$(grep -o '#Port 22' /etc/ssh/sshd_config)" == "#Port 22" ]] && sed -i "s;#Port 22;Port 22;" /etc/ssh/sshd_config && service ssh restart
-grep -v "^PasswordAuthentication" /etc/ssh/sshd_config > /tmp/passlogin && mv /tmp/passlogin /etc/ssh/sshd_config
-echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/script90/2.9/master/install/sshd_config > /dev/null 2>&1
+service ssh restart
 [[ ! -d /etc/bot ]] && mkdir /etc/bot
 [[ ! -d /etc/bot/info-users ]] && mkdir /etc/bot/info-users
 [[ ! -d /etc/bot/arquivos ]] && mkdir /etc/bot/arquivos
@@ -67,7 +66,6 @@ chmod +x /etc/autostart
 }
 #INICIO
 [[ $(crontab -l|grep -c "uexpired") = '0' ]] && (crontab -l 2>/dev/null; echo "0 */6 * * * /bin/uexpired") | crontab -
-[[ $(crontab -l|grep -c "verifatt") = '0' ]] && (crontab -l 2>/dev/null; echo "@daily /bin/verifatt") | crontab -
 [[ $(crontab -l|grep -c "autostart") = '0' ]] && (crontab -l 2>/dev/null; echo "@reboot /etc/autostart") | crontab -
 [[ $(crontab -l|grep -c "autostart") = '1' ]] && (crontab -l 2>/dev/null; echo "* * * * * /etc/autostart") | crontab -
 echo "$_lvk" |sed -n '1 p' |cut -d' ' -f2 > /bin/versao && cat /bin/versao > /home/sshplus
