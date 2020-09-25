@@ -1241,7 +1241,7 @@ EOF
 newclient "SSHPLUS"
 	echo ""
 	echo -e "\033[1;32mOPENVPN INSTALADO COM SUCESSO\033[0m"
-fi
+#fi
 sed -i '$ i\echo 1 > /proc/sys/net/ipv4/ip_forward' /etc/rc.local
 sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 sed -i '$ i\iptables -A INPUT -p tcp --dport 25 -j DROP' /etc/rc.local
