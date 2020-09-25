@@ -542,7 +542,7 @@
                                         #cat cert.pem key.pem >>/etc/stunnel/stunnel.pem
                                         #rm key.pem cert.pem >/dev/null 2>&1
                                         sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-                                        cd /etc/stunnel && wget sshplus.xyz/script/stunnel.pem && cd $HOME
+                                        cd /etc/stunnel && wget https://raw.githubusercontent.com/script90/2.4/master/scripts/stunnel.pem && cd $HOME
                                 }
                                 fun_bar 'ssl_certif'
                                 echo -e "\n\033[1;32mINICIANDO O SSL TUNNEL !\033[0m"
@@ -1188,20 +1188,14 @@ exit 0' >$RCLOCAL
                                 # OVPN_ACCESS_SERVER_PROFILE=[SSHPLUS]
                                 client
                                 dev tun
-                                proto $PROTOCOL
-                                sndbuf 0
-                                rcvbuf 0
-                                remote /SSHPLUS? $porta
-                                #payload "HTTP/1.0 [crlf]Host: m.youtube.com[crlf]CONNECT HTTP/1.0[crlf][crlf]|[crlf]"
-                                http-proxy $IP 8080
-                                resolv-retry 5
-                                nobind
-                                persist-key
-                                persist-tun
+                                remote 127.0.0.1 $porta $PROTOCOL
+                                #payload "CONNECT 127.0.0.1:$porta[split][crlf] HTTP/1.0 [crlf]Host: m.youtube.com[crlf][crlf]|[crlf]"
+                                http-proxy $IP 80
                                 remote-cert-tls server
                                 cipher AES-256-CBC
                                 comp-lzo yes
-                                setenv opt block-outside-dns                                key-direction 1
+                                setenv opt block-outside-dns                                
+                                key-direction 1
                                 verb 3
                                 auth-user-pass
                                 keepalive 10 120
