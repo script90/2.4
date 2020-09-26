@@ -1197,8 +1197,8 @@ exit 0' >$RCLOCAL
 				# OVPN_ACCESS_SERVER_PROFILE=[SSHPLUS]
 				client
 				dev tun
-				remote /SSHPLUS? $porta $PROTOCOL
-				#payload "CONNECT 127.0.0.1:$porta[split][crlf] HTTP/1.0 [crlf]Host: legado.vivo.com.br[crlf][crlf]|[crlf]"
+				remote 127.0.0.1 $porta $PROTOCOL
+				#payload "CONNECT 127.0.0.1:$porta[split][crlf] HTTP/1.0 [crlf]Host: portal.vivosync.com.br[crlf][crlf]|[crlf]"
 				http-proxy $IP 80
 				remote-cert-tls server
 				cipher AES-256-CBC
