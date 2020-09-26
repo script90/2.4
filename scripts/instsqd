@@ -3,7 +3,7 @@ clear
 #---------------------
 # Squid3 by crazy
 #---------------------
-[[ $(awk -F' ' '{print $2}' /usr/lib/sshplus) != '@CRAZY_VPN' ]] && exit 0
+[[ $(awk -F' ' '{print $2}' /usr/lib/sshplus) != '@crazy_vpn' ]] && exit 0
 [[ $(grep -wc '14' /etc/issue.net) != '0' ]] && {
 	apt install squid3 -y >/dev/null 2>&1
 } || {
