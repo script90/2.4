@@ -1197,9 +1197,8 @@ exit 0' >$RCLOCAL
 				# OVPN_ACCESS_SERVER_PROFILE=[SSHPLUS]
 				client
 				dev tun
-				proto $PROTOCOL
-				remote /SSHPLUS? $porta
-				#payload "HTTP/1.0 [crlf]Host: m.youtube.com[crlf]CONNECT HTTP/1.0[crlf][crlf]|[crlf]"
+				remote /SSHPLUS? $porta $PROTOCOL
+				#payload "CONNECT 127.0.0.1:$porta[split][crlf] HTTP/1.0 [crlf]Host: legado.vivo.com.br[crlf][crlf]|[crlf]"
 				http-proxy $IP 80
 				remote-cert-tls server
 				cipher AES-256-CBC
