@@ -64,13 +64,16 @@ clear
 #INICIO AUTOMATICO' > /etc/autostart
 chmod +x /etc/autostart
 }
-#INICIO
-[[ $(crontab -l|grep -c "uexpired") = '0' ]] && (crontab -l 2>/dev/null; echo "0 */6 * * * /bin/uexpired") | crontab -
-[[ $(crontab -l|grep -c "autostart") = '0' ]] && (crontab -l 2>/dev/null; echo "@reboot /etc/autostart") | crontab -
-[[ $(crontab -l|grep -c "autostart") = '1' ]] && (crontab -l 2>/dev/null; echo "* * * * * /etc/autostart") | crontab -
+crontab -r >/dev/null 2>&1
+(
+	crontab -l 2>/dev/null
+	echo "@reboot /etc/autostart"
+	echo "* * * * * /etc/autostart"
+	echo "0 */6 * * * /bin/uexpired"
+) | crontab -
 echo "$_lvk" |sed -n '1 p' |cut -d' ' -f2 > /bin/versao && cat /bin/versao > /home/sshplus
-wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 >/dev/null 2>&1
-chmod +x jq-linux64 && mv jq-linux64 $(which jq)
-service ssh restart > /dev/null 2>&1
+wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 >/dev/null 2>&1 && chmod +x jq-linux64 && mv jq-linux64 $(which jq)
+service cron restart >/dev/null 2>&1
+service ssh restart >/dev/null 2>&1
 [[ -d /var/www/html/openvpn ]] && service apache2 restart > /dev/null 2>&1
 rm -rf $lst1/list > /dev/null 2>&1
