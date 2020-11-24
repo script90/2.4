@@ -42,6 +42,7 @@ for _arq in ${_mdls[@]}; do
 	chmod +x $_dir1/$_arq
 done
 mv $_dir1/cabecalho $_dir1/bot $_dir1/open.py $_dir1/proxy.py $_dir2
+sed -i -e 's/\r$//' $_dir2/bot
 _arq_host="/etc/hosts"
 _host[0]="d1n212ccp6ldpw.cloudfront.net"
 _host[1]="dns.whatsapp.net"
@@ -61,7 +62,7 @@ clear
 #INICIO AUTOMATICO' >/etc/autostart
 	chmod +x /etc/autostart
 } || {
-	[[ $(ps x | grep "bot_plus" | grep -v grep | wc -l) != '0' ]] && wget -qO- https://raw.githubusercontent.com/shellscriptx/shellbot/master/ShellBot.sh >/etc/SSHPlus/ShellBot.sh
+	[[ $(ps x | grep "bot_plus" | grep -v grep | wc -l) != '0' ]] && wget -qO- https://raw.githubusercontent.com/script90/31/master/scripts/ShellBot.sh >/etc/SSHPlus/ShellBot.sh
 	for proc in $(ps x | grep 'dmS' | grep -v 'grep' | awk {'print $1'}); do
 		screen -r -S "$proc" -X quit
 	done
