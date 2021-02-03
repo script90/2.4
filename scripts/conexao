@@ -1198,14 +1198,13 @@ exit 0' >$RCLOCAL
 				client
 				dev tun
 				remote 127.0.0.1 $porta $PROTOCOL
-				#payload "CONNECT 127.0.0.1:$porta[split][crlf] HTTP/1.0 [crlf]Host: portal.vivosync.com.br[crlf][crlf]|[crlf]"
+				#payload "HTTP/1.0 [crlf][crlf]|[crlf]"
 				http-proxy $IP 80
 				remote-cert-tls server
 				cipher AES-256-CBC
 				comp-lzo yes
 				setenv opt block-outside-dns
 				key-direction 1
-				verb 3
 				auth-user-pass
 				keepalive 10 120
 				float
