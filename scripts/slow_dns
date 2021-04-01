@@ -15,21 +15,21 @@ SCOLOR='\033[0m'
 fun_autodns() {
 interface=$(ip a | awk '/state UP/{print $2}' | cut -d: -f1)
 cat <<EOF >/etc/SSHPlus/dns/autodns
-iptables -F >/dev/null 2>&1
-iptables -I INPUT -p udp --dport 5300 -j ACCEPT
-iptables -t nat -I PREROUTING -i $interface -p udp --dport 53 -j REDIRECT --to-ports 5300
-ip6tables -I INPUT -p udp --dport 5300 -j ACCEPT
-ip6tables -t nat -I PREROUTING -i $interface -p udp --dport 53 -j REDIRECT --to-ports 5300
+#iptables -F >/dev/null 2>&1
+#iptables -I INPUT -p udp --dport 53 -j ACCEPT
+#iptables -t nat -I PREROUTING -i $interface -p udp --dport 53 -j REDIRECT --to-ports 53
+#ip6tables -I INPUT -p udp --dport 53 -j ACCEPT
+#ip6tables -t nat -I PREROUTING -i $interface -p udp --dport 53 -j REDIRECT --to-ports 53
 EOF
 chmod 777 /etc/SSHPlus/dns/autodns
 }
 configdns() {
 interface=$(ip a | awk '/state UP/{print $2}' | cut -d: -f1)
-iptables -F >/dev/null 2>&1
-iptables -I INPUT -p udp --dport 5300 -j ACCEPT
-iptables -t nat -I PREROUTING -i $interface -p udp --dport 53 -j REDIRECT --to-ports 5300
-ip6tables -I INPUT -p udp --dport 5300 -j ACCEPT
-ip6tables -t nat -I PREROUTING -i $interface -p udp --dport 53 -j REDIRECT --to-ports 5300
+#iptables -F >/dev/null 2>&1
+#iptables -I INPUT -p udp --dport 53 -j ACCEPT
+#iptables -t nat -I PREROUTING -i $interface -p udp --dport 53 -j REDIRECT --to-ports 53
+#ip6tables -I INPUT -p udp --dport 53 -j ACCEPT
+#ip6tables -t nat -I PREROUTING -i $interface -p udp --dport 53 -j REDIRECT --to-ports 53
 }
 echo -e "${CORTITLE}           SSHPLUS SLOWDNS (Beta)            ${SCOLOR}"
 installslowdns() {
@@ -50,7 +50,7 @@ fun_autodns >/dev/null 2>&1
 cat /dev/null >~/.bash_history && history -c
 }
 initslow() {
-[[ $(ss -lu | grep -wc '5300') != '0' ]] && {
+[[ $(ss -lu | grep -wc '53') != '0' ]] && {
 echo -e "\n${RED}[${CYAN}1${RED}] ${YELLOW}PARAR O SLOWDNS${SCOLOR}"
 echo -e "${RED}[${CYAN}2${RED}] ${YELLOW}REMOVER O SLOWDNS${SCOLOR}"
 echo -e "${RED}[${CYAN}3${RED}] ${YELLOW}EXIBIR INFORMACOES${SCOLOR}"
@@ -60,7 +60,7 @@ read op
 if [[ "$op" == '1' ]]; then
 screen -r -S "slow_dns" -X quit >/dev/null 2>&1
 screen -wipe >/dev/null 2>&1
-sed -i '/5300/d' /etc/autostart >/dev/null 2>&1
+sed -i '/53/d' /etc/autostart >/dev/null 2>&1
 sed -i '/slow_dns/d' /etc/SSHPlus/dns/autodns >/dev/null 2>&1
 echo -e "\n${RED}SLOWDNS DESATIVADO !${SCOLOR}"
 sleep 2
@@ -68,7 +68,7 @@ conexao
 elif [[ "$op" == '2' ]]; then
 screen -r -S "slow_dns" -X quit >/dev/null 2>&1
 screen -wipe >/dev/null 2>&1
-sed -i '/5300/d' /etc/autostart >/dev/null 2>&1
+sed -i '/53/d' /etc/autostart >/dev/null 2>&1
 rm -rf /etc/SSHPlus/dns >/dev/null 2>&1
 echo -e "\n${RED}SLOWDNS REMOVIDO !${SCOLOR}"
 sleep 2
@@ -134,11 +134,11 @@ echo -e "\n${RED}OPCAO INVALIDA${SCOLOR}"
 sleep 1.5
 initslow
 fi
-screen -dmS slow_dns $DIR/dns-server -udp :5300 -privkey-file $DIR/server.key ${ns} 0.0.0.0:${ptdns} >/dev/null 2>&1
+screen -dmS slow_dns $DIR/dns-server -udp :53 -privkey-file $DIR/server.key ${ns} 0.0.0.0:${ptdns} >/dev/null 2>&1
 keypub=$(cat $DIR/server.pub)
 cd $HOME
-echo "screen -dmS slow_dns $DIR/dns-server -udp :5300 -privkey-file $DIR/server.key ${ns} 0.0.0.0:${ptdns}" >>/etc/SSHPlus/dns/autodns
-echo "ss -lu|grep -w '5300' || /etc/SSHPlus/dns/autodns" >>/etc/autostart
+echo "screen -dmS slow_dns $DIR/dns-server -udp :53 -privkey-file $DIR/server.key ${ns} 0.0.0.0:${ptdns}" >>/etc/SSHPlus/dns/autodns
+echo "ss -lu|grep -w '53' || /etc/SSHPlus/dns/autodns" >>/etc/autostart
 tmx='curl -sO https://sshplus.net/scripts/slowdns && chmod +x slowdns && ./slowdns'
 echo -e "\n${GREEN}SLOWDNS ATIVADO !${SCOLOR}"
 echo -e "\n${YELLOW}COMANDO TERMUX${SCOLOR}: ${tmx} ${ns} ${keypub}"
