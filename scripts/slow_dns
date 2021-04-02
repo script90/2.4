@@ -16,20 +16,12 @@ fun_autodns() {
 interface=$(ip a | awk '/state UP/{print $2}' | cut -d: -f1)
 cat <<EOF >/etc/SSHPlus/dns/autodns
 #iptables -F >/dev/null 2>&1
-#iptables -I INPUT -p udp --dport 53 -j ACCEPT
-#iptables -t nat -I PREROUTING -i $interface -p udp --dport 53 -j REDIRECT --to-ports 53
-#ip6tables -I INPUT -p udp --dport 53 -j ACCEPT
-#ip6tables -t nat -I PREROUTING -i $interface -p udp --dport 53 -j REDIRECT --to-ports 53
 EOF
 chmod 777 /etc/SSHPlus/dns/autodns
 }
 configdns() {
 interface=$(ip a | awk '/state UP/{print $2}' | cut -d: -f1)
 #iptables -F >/dev/null 2>&1
-#iptables -I INPUT -p udp --dport 53 -j ACCEPT
-#iptables -t nat -I PREROUTING -i $interface -p udp --dport 53 -j REDIRECT --to-ports 53
-#ip6tables -I INPUT -p udp --dport 53 -j ACCEPT
-#ip6tables -t nat -I PREROUTING -i $interface -p udp --dport 53 -j REDIRECT --to-ports 53
 }
 echo -e "${CORTITLE}           SSHPLUS SLOWDNS (Beta)            ${SCOLOR}"
 installslowdns() {
