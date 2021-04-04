@@ -16,12 +16,14 @@ fun_autodns() {
 interface=$(ip a | awk '/state UP/{print $2}' | cut -d: -f1)
 cat <<EOF >/etc/SSHPlus/dns/autodns
 #iptables -F >/dev/null 2>&1
+ulimit -u unlimited && ulimit -n 65536
 EOF
 chmod 777 /etc/SSHPlus/dns/autodns
 }
 configdns() {
 interface=$(ip a | awk '/state UP/{print $2}' | cut -d: -f1)
 #iptables -F >/dev/null 2>&1
+ulimit -u unlimited && ulimit -n 65536
 }
 echo -e "${CORTITLE}           SSHPLUS SLOWDNS (Beta)            ${SCOLOR}"
 installslowdns() {
@@ -126,6 +128,7 @@ echo -e "\n${RED}OPCAO INVALIDA${SCOLOR}"
 sleep 1.5
 initslow
 fi
+ulimit -u unlimited && ulimit -n 65536
 screen -dmS slow_dns $DIR/dns-server -udp :53 -privkey-file $DIR/server.key ${ns} 0.0.0.0:${ptdns} >/dev/null 2>&1
 keypub=$(cat $DIR/server.pub)
 cd $HOME
